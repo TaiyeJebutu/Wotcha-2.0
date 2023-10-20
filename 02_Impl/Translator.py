@@ -1,6 +1,6 @@
 import logging
 
-from Stores.MessageStore import MessageStore
+from MessageStore import MessageStore
 from CoreServer import CoreServer
 from threading import Thread
 

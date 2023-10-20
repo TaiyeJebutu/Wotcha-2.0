@@ -1,6 +1,6 @@
 from Core import Core
 from GUI import GUI
-from Translator import  Translator
+from Translator import Translator
 import logging
 
 
