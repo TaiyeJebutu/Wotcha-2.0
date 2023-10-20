@@ -1,0 +1,65 @@
+@startuml
+title Overall Wotcha Class Diagram
+
+class Core {
+    - GUI gui
+    - CoreServer server
+    - Translator translator
+    - MessageStore messages
+    + init(gui)
+    + set_filter(filter)
+    + run_server()
+    + stop_server()
+}
+
+class GUI{
+    - update_display()
+}
+
+interface GenericStore{
+}
+
+abstract Store{
+}
+
+class MessageStore{
+    - add(message)
+    - get(message)
+}
+
+class ServerStore{
+    - add(message)
+    - get(message)
+}
+
+class Translator{
+    - translate_message()
+}
+
+class Filter{
+}
+
+class CoreServer{
+    - handle_message()
+}
+
+
+Core *-- CoreServer
+Core *-- Translator
+Core *-- GUI
+
+CoreServer *-- ServerStore
+Core *-- MessageStore
+
+GenericStore <|-- Store
+
+Store <|-- MessageStore
+Store <|-- ServerStore
+
+Translator *-- Filter
+
+
+
+
+
+@enduml

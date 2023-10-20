@@ -1,0 +1,11 @@
+@startuml
+title Message Received Sequence
+
+CoreServer --> CoreServer: handle_message()
+CoreServer -> ServerStore: add()
+Translator -> ServerStore: get()
+Translator --> Translator: translate_message()
+Translator -> MessageStore: add()
+GUI -> MessageStore: get()
+GUI --> GUI: update_display()
+@enduml
