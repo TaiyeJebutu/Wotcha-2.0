@@ -17,7 +17,7 @@ class GUI:
 
     def update_display(self,message):
         if message is not None:
-            self.logger.info(f"{self._log_area}: Translated Message Is -> {message}")
+            self.logger.info(f"{self._log_area}: Translated Message Is -> {message}\n")
 
 
     def check_for_messages(self):

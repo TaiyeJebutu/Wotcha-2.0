@@ -2,6 +2,7 @@ import logging
 
 from MessageStore import MessageStore
 from CoreServer import CoreServer
+from Filter import Filter
 from threading import Thread
 
 
@@ -15,12 +16,10 @@ class Translator:
         self._log_area = "Translator"
         self.logger.info(f"{self._log_area}: Creating Translator")
 
-
-    def translate(self, message):
-        new_message = message.upper()
+    def translate(self, message, _filter=Filter.bin):
+        new_message = _filter(message)
         self.logger.info(f"{self._log_area}: Message Translated")
         self._store.add(new_message)
-
 
     def check_for_messages(self):
         while not self._shutdown:

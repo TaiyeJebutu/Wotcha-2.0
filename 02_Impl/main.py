@@ -12,15 +12,14 @@ def run():
 
     core.start()
     gui.start()
-
-    while True:
-
-        key = input("\nEnter what you want to Translate: ")
-
-        if key.lower() == 's':
-            break
-        else:            
-            core.server.handle_message(key)
+    # while True:
+    #
+    #     key = input("\nEnter what you want to Translate: ")
+    #
+    #     if key.lower() == 's':
+    #         break
+    #     else:
+    #         core.server.handle_message(key)
 
 
 
