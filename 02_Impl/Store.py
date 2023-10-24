@@ -12,9 +12,9 @@ class Store(ABC, GenericStoreInterface):
         self._timeout = Store.TIMEOUT
         self._lock = Lock()
 
-    def add(self, data):
+    def add(self, data,addr):
         with self._lock:
-            self._queue.put(data, block=True, timeout=self._timeout)
+            self._queue.put((data,addr), block=True, timeout=self._timeout)
 
     def get(self):
         if not self._queue.empty():

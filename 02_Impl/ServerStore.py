@@ -12,6 +12,6 @@ class ServerStore(Store):
         self._log_area = "ServerStore"
         self.logger.info(f"{self._log_area}: Creating ServerStore")
 
-    def add(self, data):
-        super().add(data)
+    def add(self, data,addr):
+        super().add(data,addr)
         self.logger.info(f"{self._log_area}: Adding message to ServerStore")

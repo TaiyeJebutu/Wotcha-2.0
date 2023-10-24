@@ -2,7 +2,7 @@
 
 class GenericStoreInterface:
 
-    def add(self, data):
+    def add(self, data,addr):
         pass
 
     def get(self):

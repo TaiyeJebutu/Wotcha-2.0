@@ -15,9 +15,9 @@ class CoreServer:
         thread = Thread(target=self.server_program)
         thread.start()
 
-    def handle_message(self, msg):
+    def handle_message(self, msg,addr):
         self.logger.info(f"{self._log_area}: Message Received -> {msg}")
-        self._store.add(msg)
+        self._store.add(msg,addr)
 
     def on_new_client(self, client_socket, addr):
         while True:
@@ -25,7 +25,7 @@ class CoreServer:
                 msg = client_socket.recv(1024).decode()
                 if not msg:
                     continue
-                thread = Thread(target=self.handle_message, args=(msg,))
+                thread = Thread(target=self.handle_message, args=(msg,addr))
                 thread.start()
             except:
                 break

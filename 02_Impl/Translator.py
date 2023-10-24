@@ -16,16 +16,17 @@ class Translator:
         self._log_area = "Translator"
         self.logger.info(f"{self._log_area}: Creating Translator")
 
-    def translate(self, message, _filter=Filter.bin):
+    def translate(self, message, addr,_filter=Filter.bin):
         new_message = _filter(message)
         self.logger.info(f"{self._log_area}: Message Translated")
-        self._store.add(new_message)
+        self._store.add(new_message,addr)
 
     def check_for_messages(self):
         while not self._shutdown:
-            message = self._server._store.get()
-            if message is not None:
-                self.translate(message)
+            item = self._server._store.get()
+            if item is not None:
+                message, addr = item
+                self.translate(message,addr)
 
     def start(self):
         thread = Thread(target=self.check_for_messages)

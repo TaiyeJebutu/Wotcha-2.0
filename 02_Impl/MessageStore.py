@@ -13,6 +13,6 @@ class MessageStore(Store):
         self.logger.info(f"{self._log_area}: Creating MessageStore")
 
 
-    def add(self, data):
-        super().add(data)
+    def add(self, data, _):
+        super().add(data, _)
         self.logger.info(f"{self._log_area}: Adding message to MessageStore")
