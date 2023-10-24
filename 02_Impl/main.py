@@ -19,9 +19,8 @@ def run():
 
         if key.lower() == 's':
             break
-        else:
-            for i in range(1000):
-                core.server.handle_message(key)
+        else:            
+            core.server.handle_message(key)
 
 
 
