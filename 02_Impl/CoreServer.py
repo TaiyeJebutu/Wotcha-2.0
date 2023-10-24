@@ -20,9 +20,11 @@ class CoreServer:
         self._store.add(msg,addr)
 
     def on_new_client(self, client_socket, addr):
+        client_socket.send(str(addr[1]).encode())
         while True:
             try:
                 msg = client_socket.recv(1024).decode()
+
                 if not msg:
                     continue
                 thread = Thread(target=self.handle_message, args=(msg,addr))
@@ -32,29 +34,36 @@ class CoreServer:
 
         client_socket.close()
 
-    def server_program(self):
-        # get the hostname
+    def bind_sockets(self, port):
         host = socket.gethostname()
-        port = 5000  # initiate port no above 1024
-
-        server_socket = socket.socket()  # get instance
-        # look closely. The bind() function takes tuple as argument
-        server_socket.bind((host, port))  # bind host address and port together
-
-        # configure how many client the server can listen simultaneously
+        port = port
+        server_socket = socket.socket()
+        server_socket.bind((host, port))
         server_socket.listen(10)
         while True:
             conn, address = server_socket.accept()  # accept new connection
             print("Connection from: " + str(address))
             _thread.start_new_thread(self.on_new_client(conn, address))
 
+    def server_program(self):
+        # get the hostname
+        host = socket.gethostname()
+        # port_one = 5000  # initiate port no above 1024
+        # port_two = 5001  # initiate port no above 1024
+        ports = [5000,5001]
+
+        # server_socket = socket.socket()  # get instance
+        # # look closely. The bind() function takes tuple as argument
+        # server_socket.bind((host, port_one))  # bind host address and port together
+        # server_socket.bind((host, port_two))  # bind host address and port together
+
+        # configure how many client the server can listen simultaneously
+        # server_socket.listen(10)
         # while True:
-        #     # receive data stream. it won't accept data packet greater than 1024 bytes
-        #     data = conn.recv(1024).decode()
-        #     if not data:
-        #         # if data is not received break
-        #         continue
-        #     thread = Thread(target=self.handle_message, args=(data,))
-        #     thread.start()
-        #
-        # conn.close()  # close the connection
+        #     conn, address = server_socket.accept()  # accept new connection
+        #     print("Connection from: " + str(address))
+        #     _thread.start_new_thread(self.on_new_client(conn, address))
+        for port in ports:
+            _thread.start_new_thread(self.bind_sockets, (port,))
+
+
