@@ -39,8 +39,8 @@ def run():
         if key.lower() == "get decoders":
             get_decoder()
         if key.lower() == "shutdown":
+            print("Shutting the system down ....")
             core.stop()
-            print("System shutdown")
             break
         else:
             print(f"--------HELP--------\n"

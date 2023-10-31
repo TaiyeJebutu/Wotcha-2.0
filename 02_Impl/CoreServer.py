@@ -21,6 +21,7 @@ class CoreServer:
         self.logger.info(f"{self._log_area}: Stopping CoreServer")
 
     def start(self):
+        self.logger.info(f"{self._log_area}: Starting CoreServer")
         self._thread.start()
 
     def handle_message(self, msg,addr):
