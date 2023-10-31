@@ -2,6 +2,7 @@ from Core import Core
 from GUI import GUI
 from Translator import Translator
 import logging
+import _thread
 
 def set_decoder():
     key = input("Enter <ip>-<port>-<decoder>"
@@ -25,6 +26,14 @@ def get_decoder():
         print(f"{key}:{value}")
     print("\n")
 
+def open_port():
+    key = input("Port to open -> ")
+    try:
+        _thread.start_new_thread(core.server.bind_sockets(int(key)))
+    except Exception as e:
+        pass
+
+
 def run():
 
 
@@ -38,6 +47,8 @@ def run():
             set_decoder()
         if key.lower() == "get decoders":
             get_decoder()
+        if key.lower() == "open port":
+            open_port()
         if key.lower() == "shutdown":
             print("Shutting the system down ....")
             core.stop()

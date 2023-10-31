@@ -49,6 +49,7 @@ class CoreServer:
         server_socket = socket.socket()
         server_socket.bind((host, port))
         server_socket.listen(10)
+        print(f"binding {port}")
 
         while self._shutdown:
             conn, address = server_socket.accept()  # accept new connection

@@ -12,6 +12,7 @@ class GUI:
         self.logger = logging.getLogger(__name__)
         self._log_area = "GUI"
         self.logger.info(f"{self._log_area}: Creating GUI")
+        self.thread = Thread(target=self.check_for_messages)
 
 
 
@@ -32,6 +33,6 @@ class GUI:
 
 
     def start(self):
-        thread = Thread(target=self.check_for_messages)
-        thread.start()
         self.logger.info(f"{self._log_area}: Starting GUI")
+        self.thread.start()
+

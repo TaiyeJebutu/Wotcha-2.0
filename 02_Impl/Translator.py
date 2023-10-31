@@ -18,7 +18,7 @@ class Translator:
         self.logger = logging.getLogger(__name__)
         self._log_area = "Translator"
         self.logger.info(f"{self._log_area}: Creating Translator")
-        self._thread = thread = Thread(target=self.check_for_messages)
+        self._thread = Thread(target=self.check_for_messages)
 
     def stop(self):
         self._shutdown = True
