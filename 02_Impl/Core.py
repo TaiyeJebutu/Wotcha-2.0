@@ -12,11 +12,12 @@ class Core:
     def __init__(self):
 
         self.server = CoreServer()
-        self.translator = Translator(server=self.server)
+        self.translator = None
         self.logger = logging.getLogger(__name__)
         self._log_area = "Core"
         self.logger.info(f"{self._log_area}: Creating Core")
 
     def start(self):
+        self.server.start()
         self.translator.start()
 

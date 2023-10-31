@@ -8,18 +8,23 @@ from threading import Thread
 
 class Translator:
 
+
+
     def __init__(self, server: CoreServer):
         self._store = MessageStore()
+        self.connections = {}
         self._server = server
         self._shutdown = False
         self.logger = logging.getLogger(__name__)
         self._log_area = "Translator"
         self.logger.info(f"{self._log_area}: Creating Translator")
 
-    def translate(self, message, addr,_filter=Filter.bin):
-        new_message = _filter(message)
-        self.logger.info(f"{self._log_area}: Message Translated")
-        self._store.add(new_message,addr)
+    def translate(self, message, addr):
+        if addr in self.connections:
+            new_message = Filter().filter(message, self.connections[addr])
+
+            self.logger.info(f"{self._log_area}: Message Translated")
+            self._store.add(new_message,addr)
 
     def check_for_messages(self):
         while not self._shutdown:

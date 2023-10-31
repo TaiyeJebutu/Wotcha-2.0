@@ -1,10 +1,18 @@
-import encodings
+
 
 
 class Filter:
 
     def __init__(self):
         ...
+
+    def filter(self,message,decoder = 'bin'):
+        if decoder == "upper":
+            return Filter.upper_case(message)
+        if decoder == "lower":
+            return Filter.lower_case(message)
+        if decoder == "bin":
+            return Filter.bin(message)
 
     @staticmethod
     def upper_case(message:str):
