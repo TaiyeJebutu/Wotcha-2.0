@@ -13,6 +13,8 @@ class Filter:
             return Filter.lower_case(message)
         if decoder == "bin":
             return Filter.bin(message)
+        if decoder == "reverse":
+            return Filter.reverse(message)
 
     @staticmethod
     def upper_case(message:str):
@@ -25,3 +27,7 @@ class Filter:
     @staticmethod
     def bin(message:str):
         return ' '.join(format(x, 'b') for x in bytearray(message, 'utf-8'))
+
+    @staticmethod
+    def reverse(message:str):
+        return ' '.join(map(lambda s:s[::-1], message.split()))

@@ -9,13 +9,14 @@ def client_program():
     client_socket.connect((host, port))  # connect to the server
 
     message = ''
+    wait_for_response = True
 
     while message.lower().strip() != 'bye':
 
-
-
-        message = client_socket.recv(1024).decode()
-        print(f"Designated Port: {message}")
+        if wait_for_response:
+            message = client_socket.recv(1024).decode()
+            print(f"Designated Port: {message}")
+            wait_for_response = False
 
         message = input(" -> ")  # again take input
         client_socket.send(message.encode())  # send message
