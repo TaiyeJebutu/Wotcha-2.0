@@ -44,9 +44,9 @@ def run():
 
         key = input("-->")
 
-        if key.lower() == "set decode":
+        if key.lower() == "set decoder":
             set_decoder()
-        if key.lower() == "get decoders":
+        if key.lower() == "get decoder":
             get_decoder()
         if key.lower() == "bind port":
             open_port()
@@ -56,8 +56,8 @@ def run():
             break
         else:
             print(f"--------HELP--------\n"
-                  f"set decode  : set the decode \n"
-                  f"get decoders: get the decoders\n"
+                  f"set decoder : set the decode \n"
+                  f"get decoder : get the decoders\n"
                   f"bind port   : bind a port\n"
                   f"shutdown    : shutdown the system\n"                 
                   f"help        : show help menu")
