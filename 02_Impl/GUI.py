@@ -4,11 +4,11 @@ from threading import Thread
 
 
 
+
 class GUI:
 
     def __init__(self,core ):
         self._core = core
-        self._shutdown = False
         self.logger = logging.getLogger(__name__)
         self._log_area = "GUI"
         self.logger.info(f"{self._log_area}: Creating GUI")
@@ -21,9 +21,15 @@ class GUI:
 
 
     def check_for_messages(self):
-        while not self._shutdown:
-            message = self._core.translator._store.get()
-            self.update_display(message)
+        while True:
+            if not self._core.shutdown:
+                message = self._core.translator._store.get()
+                self.update_display(message)
+            else:
+                self.logger.info(f"{self._log_area}: Stopping GUI")
+                break
+
+
 
     def start(self):
         thread = Thread(target=self.check_for_messages)

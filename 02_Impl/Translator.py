@@ -19,6 +19,10 @@ class Translator:
         self._log_area = "Translator"
         self.logger.info(f"{self._log_area}: Creating Translator")
 
+    def stop(self):
+        self._shutdown = True
+        self.logger.info(f"{self._log_area}: Stopping Translator")
+
     def translate(self, message, addr):
         if addr in self.connections:
             new_message = Filter().filter(message, self.connections[addr])

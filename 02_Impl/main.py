@@ -14,13 +14,16 @@ def set_decoder():
                   f" {params[1]}\n")
             connection_key = tuple([params[0],int(params[1])])
             core.translator.connections[connection_key] = params[2]
-            for key, value in core.translator.connections.items():
-                print(f"{key}:{value}")
         except Exception as e:
             pass
     else:
         pass
 
+def get_decoder():
+    print("Currently loaded decoders:\n")
+    for key, value in core.translator.connections.items():
+        print(f"{key}:{value}")
+    print("\n")
 
 def run():
 
@@ -33,11 +36,18 @@ def run():
 
         if key.lower() == "set decode":
             set_decoder()
+        if key.lower() == "get decoders":
+            get_decoder()
+        if key.lower() == "shutdown":
+            core.stop()
+            print("System shutdown")
+            break
         else:
             print(f"--------HELP--------\n"
-                  f"set decode: set the decode option\n"
-                  f"shutdown : shutdown the system\n"
-                  f"help: show help menu")
+                  f"set decode  : set the decode \n"
+                  f"get decoders: get the decoders\n"
+                  f"shutdown    : shutdown the system\n"
+                  f"help        : show help menu")
 
 
 
