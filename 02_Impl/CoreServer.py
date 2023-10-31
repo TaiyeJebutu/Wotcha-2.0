@@ -49,11 +49,12 @@ class CoreServer:
         server_socket = socket.socket()
         server_socket.bind((host, port))
         server_socket.listen(10)
-        print(f"binding {port}")
+        self.logger.info(f"{self._log_area}: Binding {port}")
 
-        while self._shutdown:
+        while not self._shutdown:
             conn, address = server_socket.accept()  # accept new connection
             print("Connection from: " + str(address))
+            self.logger.info(f"{self._log_area}:Connection from: {str(address)}")
             self._translator.connections[address] = "bin"
             _thread.start_new_thread(self.on_new_client(conn, address))
 
@@ -63,7 +64,7 @@ class CoreServer:
         # get the hostname
         host = socket.gethostname()
 
-        ports = [5000,5001]
+        ports = []
 
         for port in ports:
             _thread.start_new_thread(self.bind_sockets, (port,))

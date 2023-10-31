@@ -2,7 +2,7 @@ from Core import Core
 from GUI import GUI
 from Translator import Translator
 import logging
-import _thread
+from threading import Thread
 
 def set_decoder():
     key = input("Enter <ip>-<port>-<decoder>"
@@ -29,7 +29,8 @@ def get_decoder():
 def open_port():
     key = input("Port to open -> ")
     try:
-        _thread.start_new_thread(core.server.bind_sockets(int(key)))
+        thread = Thread(target = core.server.bind_sockets, args= (int(key),))
+        thread.start()
     except Exception as e:
         pass
 
@@ -58,6 +59,7 @@ def run():
                   f"set decode  : set the decode \n"
                   f"get decoders: get the decoders\n"
                   f"shutdown    : shutdown the system\n"
+                  f"open port   : Open a port"
                   f"help        : show help menu")
 
 
